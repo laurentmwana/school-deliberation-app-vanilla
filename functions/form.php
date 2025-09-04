@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Génère un champ input Bootstrap avec gestion d'erreur.
+ * Génère un champ input Bootstrap avec gestion d'erreur depuis la session
  */
-function input(string $key, string $type = 'text', ?string $value = null, ?string $error = null): string
+function input(string $key, string $type = 'text', ?string $value = null): string
 {
+    $error = getValidatorError($key);
+
+    // 🔥 On récupère l'ancienne valeur soumise (ou valeur par défaut/DB)
+    $value = old($key, $value);
+
     $isInvalid = $error ? ' is-invalid' : '';
-
-    // Utiliser la valeur POST si elle existe, sinon celle fournie
-    $value = $_POST[$key] ?? $value ?? '';
-
-    // Construire le bloc d'erreur séparément
     $errorHtml = $error ? "<div class='invalid-feedback'>{$error}</div>" : '';
 
     return <<<HTML
@@ -28,15 +28,16 @@ HTML;
 }
 
 /**
- * Génère un champ textarea Bootstrap avec gestion d'erreur.
+ * Génère un champ textarea Bootstrap avec gestion d'erreur depuis la session
  */
-function textarea(string $key, ?string $value = null, ?string $error = null, int $rows = 3): string
+function textarea(string $key, ?string $value = null, int $rows = 3): string
 {
+    $error = getValidatorError($key);
+
+    // 🔥 old() gère la récupération
+    $value = old($key, $value);
+
     $isInvalid = $error ? ' is-invalid' : '';
-
-    // Utiliser la valeur POST si elle existe, sinon celle fournie
-    $value = $_POST[$key] ?? $value ?? '';
-
     $errorHtml = $error ? "<div class='invalid-feedback'>{$error}</div>" : '';
 
     return <<<HTML
@@ -53,15 +54,16 @@ HTML;
 }
 
 /**
- * Génère un champ select Bootstrap avec options dynamiques et gestion d'erreur.
+ * Génère un champ select Bootstrap avec options dynamiques et gestion d'erreur depuis la session
  */
-function select(string $key, array $options, ?string $selected = null, ?string $error = null): string
+function select(string $key, array $options, ?string $selected = null): string
 {
+    $error = getValidatorError($key);
+
+    // 🔥 old() gère la sélection après redirect
+    $selected = old($key, $selected);
+
     $isInvalid = $error ? ' is-invalid' : '';
-
-    // Utiliser la valeur POST si elle existe, sinon celle fournie
-    $selected = $_POST[$key] ?? $selected ?? '';
-
     $errorHtml = $error ? "<div class='invalid-feedback'>{$error}</div>" : '';
 
     // Génération des options

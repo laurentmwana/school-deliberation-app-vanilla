@@ -2,6 +2,8 @@
 
 const SESSION_FLASH_MESSAGE_KEY = "FLASH_MESSAGE";
 const SESSION_INPUT_ERROR_KEY = "INPUT_ERRORS";
+const SESSION_OLD_INPUT_KEY = 'OLD_INPUTS';
+
 
 /**
  * Enregistre un message flash en session
@@ -38,10 +40,21 @@ function flashMessages(): array
  * @param string $message
  * @return void
  */
-function inputError(string $key, string $message): void
+function addInputError(string $key, string $message): void
 {
     $_SESSION[SESSION_INPUT_ERROR_KEY][$key] = $message;
 }
+
+function addInputErrors(array $errors): void
+{
+    $_SESSION[SESSION_INPUT_ERROR_KEY] = $errors;
+}
+
+function clearErrorsInputs(): void
+{
+    unset($_SESSION[SESSION_INPUT_ERROR_KEY]);
+}
+
 
 /**
  * Récupère le message d'erreur pour un champ et le supprime de la session
@@ -49,14 +62,49 @@ function inputError(string $key, string $message): void
  * @param string $key
  * @return string|null
  */
-function inputErrors(string $key): ?string
+function getValidatorError(string $key): ?string
 {
-    if (!isset($_SESSION[SESSION_INPUT_ERROR_KEY][$key])) {
+   // On n'affiche l'erreur que si POST existe ou si OLD_INPUTS est présent
+    if ((empty($_POST) && empty($_SESSION[SESSION_OLD_INPUT_KEY])) || !isset($_SESSION[SESSION_INPUT_ERROR_KEY][$key])) {
         return null;
     }
 
-    $message = $_SESSION[SESSION_INPUT_ERROR_KEY][$key];
+    $error = $_SESSION[SESSION_INPUT_ERROR_KEY][$key] ?? null;
+
+    // Une fois affichée, on peut la supprimer
     unset($_SESSION[SESSION_INPUT_ERROR_KEY][$key]);
 
-    return $message;
+    return $error;
+}
+
+
+
+/**
+ * Sauvegarde les inputs dans la session avant redirect
+ */
+function saveOldInputs(array $inputs): void
+{
+    $_SESSION[SESSION_OLD_INPUT_KEY] = $inputs;
+}
+
+/**
+ * Récupère une ancienne valeur d'input après redirect
+ */
+function old(string $key, $default = ''): ?string
+{
+    if (!isset($_SESSION[SESSION_OLD_INPUT_KEY])) {
+        return $default;
+    }
+
+    $value = $_SESSION[SESSION_OLD_INPUT_KEY][$key] ?? $default;
+
+    return $value;
+}
+
+/**
+ * Nettoie les anciennes valeurs après affichage
+ */
+function clearOldInputs(): void
+{
+    unset($_SESSION[SESSION_OLD_INPUT_KEY]);
 }
