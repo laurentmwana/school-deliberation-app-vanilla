@@ -134,33 +134,17 @@ function ago(string|DateTime $datetime): string
         return "il y a {$diff->y} an(s)";
     }
     if ($diff->m > 0) {
-        return "il y a {$diff->m} mois";
+        return "il y a {$diff->m} m";
     }
     if ($diff->d > 0) {
-        return "il y a {$diff->d} jour(s)";
+        return "il y a {$diff->d} jr(s)";
     }
     if ($diff->h > 0) {
-        return "il y a {$diff->h} heure(s)";
+        return "il y a {$diff->h} hr(s)";
     }
     if ($diff->i > 0) {
-        return "il y a {$diff->i} minute(s)";
+        return "il y a {$diff->i} min(s)";
     }
 
     return "à l’instant";
-}
-
-function flashMessage(string $key, string $message)
-{
-    $_SESSION['FLASH_MESSAGE'][$key] = $message;
-}
-
-function flashMessages()
-{
-    if (!isset($_SESSION['FLASH_MESSAGE'])) {
-        return [];
-    }
-
-    $flashMessages = $_SESSION['FLASH_MESSAGE'];
-    unset($_SESSION['FLASH_MESSAGE']);
-    return $flashMessages;
 }

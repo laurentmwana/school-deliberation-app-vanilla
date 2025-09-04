@@ -9,7 +9,9 @@
   ],
   "autoload": {
     "files": [
-      "function.php"
+      "functions/utils.php",
+      "functions/form.php",
+      "functions/session.php"
     ]
   },
   "require": {}
