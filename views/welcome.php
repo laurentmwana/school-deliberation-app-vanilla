@@ -1,3 +1,5 @@
 <?php require 'inc/header.php' ?>
-<h2>hey</h2>
+<div class="container py-5">
+    <h2>Welcome page</h2>
+</div>
 <?php require 'inc/footer.php' ?>

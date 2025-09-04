@@ -22,8 +22,6 @@ try {
 define("BASE_VIEW_PATH", __DIR__ . '/../views');
 define('BASE_RESOURCE', dirname($_SERVER['SCRIPT_NAME']) . 'assets');
 
-var_dump(BASE_RESOURCE);
-
 $url = $_SERVER['REQUEST_URI'] ?? '/';
 
 switch ($url) {
@@ -33,5 +31,5 @@ switch ($url) {
 
     default:
         http_response_code(404);
-        echo "404 - Page not found";
+        require BASE_VIEW_PATH . '/404.php';
 }

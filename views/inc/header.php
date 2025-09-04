@@ -21,5 +21,38 @@
 
     <!-- Fichier JS custom -->
     <script src="<?= rtrim(BASE_RESOURCE, '/') ?>/app.js" defer></script>
+
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:300i,400,400i,500,500i,600,600i,700,700i,800,800i,900|inter:100,400,700" rel="stylesheet" />
 </head>
 <body>
+
+<!-- MENU DE NAVIGATIOn -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">SchoolDelibe</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Acceuil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Promotion</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Année</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Cours</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Etudiant</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- END MENU -->
