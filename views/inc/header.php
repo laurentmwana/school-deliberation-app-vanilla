@@ -51,6 +51,12 @@
         <li class="nav-item">
             <a class="nav-link" href="#">Etudiant</a>
         </li>
+         <li class="nav-item">
+            <a class="nav-link" href="#">Note</a>
+        </li>
+         <li class="nav-item">
+            <a class="nav-link" href="#">Résultats</a>
+        </li>
       </ul>
     </div>
   </div>
