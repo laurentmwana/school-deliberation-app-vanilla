@@ -20,6 +20,9 @@ try {
 
 // Chemin vers les vues
 define("BASE_VIEW_PATH", __DIR__ . '/../views');
+define('BASE_RESOURCE', dirname($_SERVER['SCRIPT_NAME']) . 'assets');
+
+var_dump(BASE_RESOURCE);
 
 $url = $_SERVER['REQUEST_URI'] ?? '/';
 
