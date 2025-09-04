@@ -1,6 +1,6 @@
 <?php
 
-require BASE_PATH . '/app/queries/year.php';
+require BASE_PATH . '/queries/year.php';
 
 $yearId = $routeParams["id"] ?? null;
 
