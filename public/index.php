@@ -1,34 +1,53 @@
 <?php
-declare(strict_types=1);
+
+session_start();
 
 require __DIR__ . '/../vendor/autoload.php';
 
-try {
-    $pdo = new PDO(
-        "mysql:host=localhost;dbname=school_deliberation_app;charset=utf8mb4",
-        "root",
-        "demo",
-        [
-            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_EMULATE_PREPARES   => false,
-        ]
-    );
-} catch (PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
-}
 
-// Chemin vers les vues
-define("BASE_VIEW_PATH", __DIR__ . '/../views');
+define("BASE_PATH", dirname(__DIR__));
+define("BASE_VIEW_PATH", BASE_PATH . '/views');
+define("BASE_RESOURCE", dirname($_SERVER['SCRIPT_NAME']) . 'assets');
 
-$url = $_SERVER['REQUEST_URI'] ?? '/';
+const ROUTES = [
+    'home'        => '/',
+    'year.index'  => '/years',
+    'year.show'   => '/year/:id',
+    'year.closed'   => '/year/:id/closed',
+    'year.destroy'=> '/year/:id/destroy',
+];
 
-switch ($url) {
-    case '/':
-        require BASE_VIEW_PATH . '/welcome.php';
-        break;
+$url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?? '/';
 
-    default:
-        http_response_code(404);
-        echo "404 - Page not found";
+$match = matchRoute($url);
+
+if ($match) {
+    $routeParams = $match['params'];
+
+    switch ($match['name']) {
+        case 'home':
+            require BASE_VIEW_PATH . '/welcome.php';
+            break;
+        case 'year.index':
+            require BASE_VIEW_PATH . '/year/index.php';
+            break;
+        case 'year.show':
+            // $match['params']['id'] contient l’ID
+            require BASE_VIEW_PATH . '/year/show.php';
+            break;
+        case 'year.closed':
+            require BASE_VIEW_PATH . '/year/closed.php';
+            break;
+
+        case 'year.destroy':
+            // $match['params']['id'] contient l’ID
+            require BASE_VIEW_PATH . '/year/destroy.php';
+            break;
+        default:
+            http_response_code(404);
+            require BASE_VIEW_PATH . '/404.php';
+    }
+} else {
+    http_response_code(404);
+    require BASE_VIEW_PATH . '/404.php';
 }

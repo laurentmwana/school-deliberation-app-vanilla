@@ -7,5 +7,12 @@
       "email": "laurentmwn@gmail.com"
     }
   ],
+  "autoload": {
+    "files": [
+      "functions/utils.php",
+      "functions/form.php",
+      "functions/session.php"
+    ]
+  },
   "require": {}
 }
