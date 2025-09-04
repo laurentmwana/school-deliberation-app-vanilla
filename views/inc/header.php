@@ -37,13 +37,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Acceuil</a>
+          <a class="nav-link active" aria-current="page" href="<?= route("home") ?>">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Promotion</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Année</a>
+          <a class="nav-link" href="<?= route("year.index") ?>">Année</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Cours</a>
