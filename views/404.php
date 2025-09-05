@@ -1,4 +1,7 @@
-<?php require 'inc/header.php'; ?>
+<?php 
+$title = "404 - Page introuvable";
+
+require 'inc/header.php'; ?>
 
 <div class="container text-center mt-5">
     <h1 class="display-1 text-danger">404</h1>

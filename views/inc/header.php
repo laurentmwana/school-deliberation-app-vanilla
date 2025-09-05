@@ -17,7 +17,6 @@
 
     <!-- JS de Bootstrap et dépendances -->
     <script src="<?= rtrim(BASE_RESOURCE, '/') ?>/bootstrap/js/bootstrap.bundle.min.js" defer></script>
-    <script src="<?= rtrim(BASE_RESOURCE, '/') ?>/bootstrap/js/bootstrap.min.js" defer></script>
 
     <!-- Fichier JS custom -->
     <script src="<?= rtrim(BASE_RESOURCE, '/') ?>/app.js" defer></script>
@@ -30,35 +29,54 @@
 <!-- MENU DE NAVIGATIOn -->
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">SchoolDelibe</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand fw-bold" href="<?= route("home") ?>">SchoolDelibe</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="<?= route("home") ?>">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<?= route("level.index") ?>">Promotion</a>
+          <a class="nav-link <?= isMenuActive(route("home")) ? 'text-primary fw-semibold' : '' ?>" href="<?= route("home") ?>">Accueil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?= route("year.index") ?>">Année</a>
+          <a class="nav-link <?= isMenuActive(route("level.index")) ? 'text-primary fw-semibold' : '' ?>" href="<?= route("level.index") ?>">Promotion</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?= route("course.index") ?>">Cours</a>
+          <a class="nav-link <?= isMenuActive(route("year.index")) ? 'text-primary fw-semibold' : '' ?>" href="<?= route("year.index") ?>">Année</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Etudiant</a>
+          <a class="nav-link <?= isMenuActive(route("course.index")) ? 'text-primary fw-semibold' : '' ?>" href="<?= route("course.index") ?>">Cours</a>
         </li>
-         <li class="nav-item">
-            <a class="nav-link" href="#">Note</a>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Étudiant</a>
         </li>
-         <li class="nav-item">
-            <a class="nav-link" href="#">Résultats</a>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Notes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Résultats</a>
         </li>
       </ul>
+
+      <!-- Dropdown utilisateur connecté -->
+      <?php if (hasUserConnect()): ?>
+        <?php $user = getUserConnect(); ?>
+        <form style="display: inline-block;" action="<?= route('auth.logout') ?>" onsubmit="return confirm('Voulez-vous vraimmnt effectuer cette action ?')" method="post">
+          <button type="submit"  class="btn btn-sm btn-danger">
+            Se déconnecter
+          </button>
+        </form>
+      <?php else: ?>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="btn btn-sm btn-light" href="<?= route('auth.login') ?>">Se connecter</a>
+          </li>
+        </ul>
+      <?php endif; ?>
     </div>
   </div>
 </nav>
+
 <!-- END MENU -->
