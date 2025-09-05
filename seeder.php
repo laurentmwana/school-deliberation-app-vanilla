@@ -46,10 +46,8 @@ foreach ($levels as $level) {
     }
 }
 
-$defaultPassword = password_hash("pwd1234", PASSWORD_BCRYPT);
+$defaultPassword = password_hash("admin123", PASSWORD_BCRYPT);
+$username = "admin";
 
- for ($i=1; $i <= 5 ; $i++) {
-    $name = "users$i";
-    $insert = $pdo->prepare("INSERT INTO users (username, password, created_at) VALUES (?, ?, NOW())");
-    $insert->execute([$name, $defaultPassword]);
-}
+$insert = $pdo->prepare("INSERT INTO users (username, password, created_at) VALUES (?, ?, NOW())");
+$insert->execute([$username, $defaultPassword]);
