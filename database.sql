@@ -33,6 +33,17 @@ CREATE TABLE IF NOT EXISTS `courses` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 
+
+-- Listage de la structure de table school_deliberation_app. years
+CREATE TABLE IF NOT EXISTS `years` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `start` int(11) NOT NULL,
+  `end` int(11) NOT NULL,
+  `is_closed` tinyint(4) NOT NULL DEFAULT 0,
+  `created_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+
 -- Listage de la structure de table school_deliberation_app. levels
 CREATE TABLE IF NOT EXISTS `levels` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -93,15 +104,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 
--- Listage de la structure de table school_deliberation_app. years
-CREATE TABLE IF NOT EXISTS `years` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `start` int(11) NOT NULL,
-  `end` int(11) NOT NULL,
-  `is_closed` tinyint(4) NOT NULL DEFAULT 0,
-  `created_at` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+
 
 -- Les données exportées n'étaient pas sélectionnées.
 
