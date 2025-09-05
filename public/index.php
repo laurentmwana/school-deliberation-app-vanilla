@@ -8,6 +8,11 @@ define("BASE_PATH", dirname(__DIR__));
 define("BASE_VIEW_PATH", BASE_PATH . '/views');
 define("BASE_RESOURCE", dirname($_SERVER['SCRIPT_NAME']) . 'assets');
 
+// database
+define("DB_NAME", 'school_deliberation_app');
+define("DB_USERNAME", 'root');
+define("DB_PWD", 'demo');
+
 const ROUTES = [
     'home'        => '/',
     // YEAR
