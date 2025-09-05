@@ -26,6 +26,15 @@ const ROUTES = [
     'level.update'  => '/level/:id/update',
     'level.show'    => '/level/:id/show',
     'level.destroy' => '/level/:id/destroy',
+
+    // COURSE
+    'course.index'   => '/courses',
+    'course.create'  => '/course/create',        
+    'course.store'   => '/course/create/store',  
+    'course.edit'    => '/course/:id/edit',
+    'course.update'  => '/course/:id/update',
+    'course.show'    => '/course/:id/show',
+    'course.destroy' => '/course/:id/destroy',
 ];
 
 $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?? '/';
@@ -76,6 +85,31 @@ if ($match) {
             require BASE_VIEW_PATH . '/level/store.php';
             break;
         // END LEVELS ROUTES
+
+
+        // COURSES ROUTES
+        case 'course.index':
+            require BASE_VIEW_PATH . '/course/index.php';
+            break;
+        case 'course.show':
+            require BASE_VIEW_PATH . '/course/show.php';
+            break;
+        case 'course.destroy':
+            require BASE_VIEW_PATH . '/course/destroy.php';
+            break;
+        case 'course.edit':
+            require BASE_VIEW_PATH . '/course/edit.php';
+            break;
+        case 'course.update':
+            require BASE_VIEW_PATH . '/course/update.php';
+            break;
+        case 'course.create':
+            require BASE_VIEW_PATH . '/course/create.php';
+            break;
+        case 'course.store':
+            require BASE_VIEW_PATH . '/course/store.php';
+            break;
+        // END COURSES ROUTES
 
         default:
             http_response_code(404);

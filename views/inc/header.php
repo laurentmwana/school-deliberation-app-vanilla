@@ -46,7 +46,7 @@
           <a class="nav-link" href="<?= route("year.index") ?>">Année</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Cours</a>
+          <a class="nav-link" href="<?= route("course.index") ?>">Cours</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Etudiant</a>

@@ -148,3 +148,30 @@ function ago(string|DateTime $datetime): string
 
     return "à l’instant";
 }
+
+/**
+ * @param mixed[] $args
+ * @return void
+ */
+function dd(mixed ...$args): void
+{
+    echo "<pre>";
+    print_r($args);
+    echo "</pre>";
+}
+
+/**
+ * x
+ * @param string $string
+ * @param int $length
+ * @param string $ellipsis
+ * @return string
+ */
+function excerpt(string $string, int $length = 100, string $ellipsis = "..."): string
+{
+    if (strlen($string) <= $length) {
+        return $string;
+    }
+
+    return substr($string, 0, $length) . $ellipsis;
+}
