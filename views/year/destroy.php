@@ -1,4 +1,6 @@
 <?php
+requireConnectUser();
+
 
 require BASE_PATH . '/queries/year.php';
 

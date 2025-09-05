@@ -1,4 +1,7 @@
-<?php 
+<?php
+requireConnectUser();
+$title = "Les années scolaires";
+
 require BASE_VIEW_PATH . '/inc/header.php';
 require BASE_PATH .'/queries/year.php';
 
