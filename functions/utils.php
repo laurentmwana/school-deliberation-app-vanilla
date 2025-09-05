@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * Génère une URL à partir du nom d’une route
  *
