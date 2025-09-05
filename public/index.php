@@ -8,10 +8,11 @@ define("BASE_PATH", dirname(__DIR__));
 define("BASE_VIEW_PATH", BASE_PATH . '/views');
 define("BASE_RESOURCE", dirname($_SERVER['SCRIPT_NAME']) . 'assets');
 
-// database
-define("DB_NAME", 'school_deliberation_app');
-define("DB_USERNAME", 'root');
-define("DB_PWD", 'demo');
+const DB_NAME = 'school_deliberation_app';
+const DB_USERNAME = 'root';
+const DB_PWD = 'demo';
+
+const GENDERS = ['M', 'F'];
 
 const ROUTES = [
     'home'        => '/',
@@ -39,7 +40,15 @@ const ROUTES = [
     // AUTH
     'auth.login'   => '/login',
     'auth.store'   => '/login/store',   
-    'auth.logout'  => '/logout',   
+    'auth.logout'  => '/logout', 
+    // STUDENT
+    'student.index'   => '/students',
+    'student.create'  => '/student/create',        
+    'student.store'   => '/student/create/store',  
+    'student.edit'    => '/student/:id/edit',
+    'student.update'  => '/student/:id/update',
+    'student.show'    => '/student/:id/show',
+    'student.destroy' => '/student/:id/destroy',
 ];
 
 try {
@@ -86,13 +95,24 @@ try {
         case 'auth.store': require BASE_VIEW_PATH . '/auth/store.php'; break;
         case 'auth.logout': require BASE_VIEW_PATH . '/auth/logout.php'; break;
 
+        // STUDENT ROUTES
+        case 'student.index': require BASE_VIEW_PATH . '/student/index.php'; break;
+        case 'student.show': require BASE_VIEW_PATH . '/student/show.php'; break;
+        case 'student.destroy': require BASE_VIEW_PATH . '/student/destroy.php'; break;
+        case 'student.edit': require BASE_VIEW_PATH . '/student/edit.php'; break;
+        case 'student.update': require BASE_VIEW_PATH . '/student/update.php'; break;
+        case 'student.create': require BASE_VIEW_PATH . '/student/create.php'; break;
+        case 'student.store': require BASE_VIEW_PATH . '/student/store.php'; break;
+
+
         default:
             throw new Exception("Page non trouvée", 404);
     }
 
 } catch (\Exception $e) {
     // Définir le code HTTP approprié
-    http_response_code($e->getCode() ?: 500);
+    $code = $e->getCode();
+    http_response_code(is_string($code) ? (int)$code : $code);
 
     // Tu peux afficher une page 404 ou 500 personnalisée
     $errorMessage = $e->getMessage();
