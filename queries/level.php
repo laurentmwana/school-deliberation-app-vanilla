@@ -42,7 +42,7 @@ function findLevelById(string $id): array
  * @param mixed $exceptId
  * @return bool
  */
-function findIfExist(string $field, string $value, ?string $exceptId = null): bool
+function findLevelIfExist(string $field, string $value, ?string $exceptId = null): bool
 {
     $pdo = getPdo();
 
