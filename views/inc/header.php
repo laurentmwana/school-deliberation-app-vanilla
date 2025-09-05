@@ -40,7 +40,7 @@
           <a class="nav-link active" aria-current="page" href="<?= route("home") ?>">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Promotion</a>
+          <a class="nav-link" href="<?= route("level.index") ?>">Promotion</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<?= route("year.index") ?>">Année</a>
@@ -50,6 +50,12 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Etudiant</a>
+        </li>
+         <li class="nav-item">
+            <a class="nav-link" href="#">Note</a>
+        </li>
+         <li class="nav-item">
+            <a class="nav-link" href="#">Résultats</a>
         </li>
       </ul>
     </div>
