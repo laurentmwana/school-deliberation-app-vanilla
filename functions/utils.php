@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * Génère une URL à partir du nom d’une route
  *
@@ -111,9 +112,9 @@ function getPdo(): PDO
     if ($pdo === null) {
         try {
             $pdo = new PDO(
-                "mysql:host=localhost;dbname=school_deliberation_app;charset=utf8mb4",
-                "root",
-                "demo",
+                sprintf("mysql:host=localhost;dbname=%s;charset=utf8mb4", DB_NAME),
+                DB_USERNAME,
+                DB_PWD,
                 [
                     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, 
                     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,  

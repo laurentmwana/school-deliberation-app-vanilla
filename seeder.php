@@ -1,5 +1,7 @@
 <?php
 
+const FAKER_GENDERS = ['M', 'F'];
+
 $pdo = new PDO(
     "mysql:host=localhost;dbname=school_deliberation_app;charset=utf8mb4",
     "root",
@@ -17,6 +19,7 @@ $pdo->exec("TRUNCATE TABLE levels");
 $pdo->exec("TRUNCATE TABLE years");
 $pdo->exec("TRUNCATE TABLE courses");
 $pdo->exec("TRUNCATE TABLE users");
+$pdo->exec("TRUNCATE TABLE students");
 $pdo->exec("SET FOREIGN_KEY_CHECKS = 1"); // réactiver les contraintes FK
 
 for ($i = 1; $i <= 20; $i++) {     
@@ -46,10 +49,19 @@ foreach ($levels as $level) {
     }
 }
 
-$defaultPassword = password_hash("pwd1234", PASSWORD_BCRYPT);
+$defaultPassword = password_hash("admin123", PASSWORD_BCRYPT);
+$username = "admin";
 
- for ($i=1; $i <= 5 ; $i++) {
-    $name = "users$i";
-    $insert = $pdo->prepare("INSERT INTO users (username, password, created_at) VALUES (?, ?, NOW())");
-    $insert->execute([$name, $defaultPassword]);
+$insert = $pdo->prepare("INSERT INTO users (username, password, created_at) VALUES (?, ?, NOW())");
+$insert->execute([$username, $defaultPassword]);
+
+foreach ($levels as $level) {
+    for ($i=0; $i < 5 ; $i++) {
+        $name = "Etudiant Name - $i";
+        $firstname = "Etudiant Firstname - $i";
+        $gender = FAKER_GENDERS[random_int(0, 1)];
+        $token = uniqid();
+        $insert = $pdo->prepare("INSERT INTO students (name, firstname, gender, registration_token, level_id, created_at) VALUES (?, ?, ?, ?, ?, NOW())");
+        $insert->execute([$name, $firstname, $gender, $token , $level['id']]);
+    }
 }
