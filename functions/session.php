@@ -3,6 +3,7 @@
 const SESSION_FLASH_MESSAGE_KEY = "FLASH_MESSAGE";
 const SESSION_INPUT_ERROR_KEY = "INPUT_ERRORS";
 const SESSION_OLD_INPUT_KEY = 'OLD_INPUTS';
+const SESSION_AUTH_USER_KEY = 'SESSION_AUTH_USER';
 
 
 /**
@@ -107,4 +108,66 @@ function old(string $key, $default = ''): ?string
 function clearOldInputs(): void
 {
     unset($_SESSION[SESSION_OLD_INPUT_KEY]);
+}
+
+function requireConnectUser(): void
+{
+    // Vérifie si un utilisateur est stocké en session
+    $user = $_SESSION[SESSION_AUTH_USER_KEY] ?? null;
+
+    if ($user === null) {
+        // Message flash (plutôt que input error)
+        flashMessage('info', 'Vous devez être connecté pour accéder à cette page.');
+
+        // Redirection vers la page de connexion et arrêt du script
+        redirect(route('auth.login'));
+        exit;
+    }
+}
+
+function requireDisconnectUser(): void
+{
+    // Supprime uniquement l'utilisateur connecté de la session
+    unset($_SESSION[SESSION_AUTH_USER_KEY]);
+
+    // Message flash pour notifier la déconnexion
+    flashMessage('success', 'Vous avez été déconnecté avec succès.');
+
+    // Redirection vers la page d'accueil et arrêt du script
+    redirect(route('home'));
+    exit;
+}
+
+
+function userAlreadyConnect(): void
+{
+    if (hasUserConnect()) {
+        flashMessage('info', 'Vous êtes déjà connecté.');
+        redirect(route('home'));
+        exit;
+    }
+}
+
+/**
+ * @return bool
+ */
+function hasUserConnect(): bool
+{
+    return isset($_SESSION[SESSION_AUTH_USER_KEY]) && !empty($_SESSION[SESSION_AUTH_USER_KEY]);
+}
+
+function getUserConnect(): array
+{
+    if (!hasUserConnect()) {
+        return [];
+    }
+
+    $user = $_SESSION[SESSION_AUTH_USER_KEY];
+
+    return $user;
+
+}
+
+function saveUserToSession(array $data){
+    $_SESSION[SESSION_AUTH_USER_KEY] = $data;
 }

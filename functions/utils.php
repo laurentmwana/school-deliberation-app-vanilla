@@ -79,12 +79,22 @@ function redirect(string $url, int $statusCode = 303): void
  */
 function isMenuActive(string $url): bool
 {
-    // Récupère l'URL courante, fallback sur "/"
-    $currentUrl = $_SERVER['REQUEST_URI'] ?? '/';
+    // URL courante sans query string
+    $currentUrl = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
 
-    // Vérifie si l'URL demandée est contenue dans l'URL courante
-    return str_contains($currentUrl, $url);
+    // Normaliser les deux (supprimer éventuels / finaux sauf pour "/")
+    $normalize = function ($u) {
+        $u = rtrim($u, '/');
+        return $u === '' ? '/' : $u;
+    };
+
+    $currentUrl = $normalize($currentUrl);
+    $url        = $normalize($url);
+
+    // Vérifie égalité stricte
+    return $currentUrl === $url;
 }
+
 
 /**
  * Fournit une connexion PDO unique (pattern Singleton via variable statique).
@@ -175,3 +185,4 @@ function excerpt(string $string, int $length = 100, string $ellipsis = "..."): s
 
     return substr($string, 0, $length) . $ellipsis;
 }
+
