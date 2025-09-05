@@ -1,4 +1,7 @@
 <?php 
+requireConnectUser();
+$title = "Edition d'une classe";
+
 require BASE_VIEW_PATH . '/inc/header.php';
 require BASE_PATH . '/queries/level.php';
 
