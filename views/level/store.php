@@ -44,12 +44,12 @@ if (!empty($_POST)) {
     // suppose que getPdo() existe et que $levelId contient l'id en cours (ou null pour création)
     if (empty($errors)) {
         // vérifier name
-        if (findIfExist('name', $name)) {
+        if (findLevelIfExist('name', $name)) {
             $errors['name'] = 'Ce nom est déjà utilisé par une autre classe.';
         }
 
         // vérifier alias
-        if (findIfExist('alias', $alias)) {
+        if (findLevelIfExist('alias', $alias)) {
             $errors['alias'] = "Cet alias est déjà utilisé par une autre classe.";
         }
     }

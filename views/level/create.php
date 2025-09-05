@@ -19,12 +19,12 @@ require BASE_VIEW_PATH . '/inc/header.php';
                 <div class="card-body">
                     <form action="<?= route('level.store')?>" method="post">
                         <div class="mb-3">
-                            <?= input('name', 'text', '') ?>
+                            <?= input('name', 'text', '', 'Nom') ?>
                             <div class="form-text">Le nom complet de la classe</div>
                         </div>
                         
                         <div class="mb-4">
-                            <?= input('alias', 'text', '') ?>
+                            <?= input('alias', 'text', '', 'Alias') ?>
                             <div class="form-text">Un code court pour identifier la classe</div>
                         </div>
                         
