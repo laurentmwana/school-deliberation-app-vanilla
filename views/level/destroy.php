@@ -1,4 +1,5 @@
 <?php
+requireConnectUser();
 
 require BASE_PATH . '/queries/level.php';
 

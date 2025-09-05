@@ -1,4 +1,6 @@
-<?php 
+<?php
+requireConnectUser();
+
 require BASE_VIEW_PATH . '/inc/header.php';
 require BASE_PATH . '/queries/level.php';
 

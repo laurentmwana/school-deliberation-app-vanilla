@@ -1,4 +1,7 @@
 <?php
+requireConnectUser();
+$title = "Détails d'une année scolaire";
+
 require BASE_PATH . '/queries/year.php';
 
 $yearId = $routeParams["id"] ?? null;

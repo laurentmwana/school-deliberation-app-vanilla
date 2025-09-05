@@ -4,6 +4,8 @@
     <!-- Hero Section -->
     <div class="row align-items-center py-5">
         <div class="col-lg-8 mx-auto text-center">
+            <?php require BASE_VIEW_PATH . '/inc/flash.php'; ?>
+
             <!-- Icône ou illustration -->
             <div class="mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-mortarboard-fill text-primary" viewBox="0 0 16 16">
@@ -33,6 +35,7 @@
             
             <!-- Cartes de fonctionnalités -->
             <div class="row mt-5">
+                
                 <div class="col-md-4 mb-4">
                     <div class="card h-100 border-0 shadow-sm">
                         <div class="card-body text-center">

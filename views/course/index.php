@@ -1,4 +1,7 @@
-<?php 
+<?php
+requireConnectUser();
+$title = "Liste des cours";
+
 require BASE_VIEW_PATH . '/inc/header.php';
 require BASE_PATH . '/queries/course.php';
 

@@ -35,6 +35,11 @@ const ROUTES = [
     'course.update'  => '/course/:id/update',
     'course.show'    => '/course/:id/show',
     'course.destroy' => '/course/:id/destroy',
+
+    // AUTH
+    'auth.login'   => '/login',
+    'auth.store'  => '/login/store',   
+    'auth.logout'  => '/logout',   
 ];
 
 $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?? '/';
@@ -110,6 +115,19 @@ if ($match) {
             require BASE_VIEW_PATH . '/course/store.php';
             break;
         // END COURSES ROUTES
+
+
+        // LOGIN
+        case 'auth.login':
+            require BASE_VIEW_PATH . '/auth/login.php';
+            break;
+        case 'auth.store':
+            require BASE_VIEW_PATH . '/auth/store.php';
+            break;
+        case 'auth.logout':
+            require BASE_VIEW_PATH . '/auth/logout.php';
+            break;
+        // END LOGIN
 
         default:
             http_response_code(404);

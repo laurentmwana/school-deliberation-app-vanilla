@@ -16,6 +16,7 @@ $pdo->exec("SET FOREIGN_KEY_CHECKS = 0"); // désactiver les contraintes FK
 $pdo->exec("TRUNCATE TABLE levels");
 $pdo->exec("TRUNCATE TABLE years");
 $pdo->exec("TRUNCATE TABLE courses");
+$pdo->exec("TRUNCATE TABLE users");
 $pdo->exec("SET FOREIGN_KEY_CHECKS = 1"); // réactiver les contraintes FK
 
 for ($i = 1; $i <= 20; $i++) {     
@@ -43,4 +44,12 @@ foreach ($levels as $level) {
         $insert = $pdo->prepare("INSERT INTO courses (name, credits, level_id, created_at) VALUES (?, ?, ?, NOW())");
         $insert->execute([$name, $credits, $level['id']]);
     }
+}
+
+$defaultPassword = password_hash("pwd1234", PASSWORD_BCRYPT);
+
+ for ($i=1; $i <= 5 ; $i++) {
+    $name = "users$i";
+    $insert = $pdo->prepare("INSERT INTO users (username, password, created_at) VALUES (?, ?, NOW())");
+    $insert->execute([$name, $defaultPassword]);
 }

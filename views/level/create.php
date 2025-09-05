@@ -1,4 +1,7 @@
 <?php 
+requireConnectUser();
+$title = "Création d'une promotion";
+
 require BASE_VIEW_PATH . '/inc/header.php';
 
 ?>
