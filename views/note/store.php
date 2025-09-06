@@ -14,6 +14,7 @@ if (!empty($_POST)) {
     $year_id    = isset($_POST['year_id'])    ? trim((string) $_POST['year_id'])    : '';
     $course_id  = isset($_POST['course_id'])  ? trim((string) $_POST['course_id'])  : '';
     $obtained   = isset($_POST['obtained'])   ? trim((string) $_POST['obtained'])   : '';
+    $period   = isset($_POST['period'])   ? trim((string) $_POST['period'])   : '';
 
     $errors = [];
 
@@ -34,6 +35,10 @@ if (!empty($_POST)) {
         $errors['obtained'] = 'La note obtenue est requise.';
     }
 
+    if ($period === '') {
+        $errors['period'] = 'La période est requise.';
+    }
+
     // --- Validation format ---
     if ($obtained !== '' && !is_numeric($obtained)) {
         $errors['obtained'] = 'La note doit être un nombre.';
@@ -44,11 +49,10 @@ if (!empty($_POST)) {
     }
 
     if (empty($errors)) {
-        if (findNoteIfExist($student_id, $course_id, $year_id)) {
+        if (findNoteIfExist($student_id, $course_id, $year_id, $period)) {
             $errors['obtained'] = 'Une note pour cet élève, ce cours et cette année existe déjà.';
         }
     }
-
 
     // --- Gestion des erreurs ---
     if (!empty($errors)) {
@@ -57,7 +61,7 @@ if (!empty($_POST)) {
         redirect(route('note.create'));
     } else {
         // Création de la note
-        $state = createNote(compact('student_id', 'level_id', 'year_id', 'course_id', 'obtained'));
+        $state = createNote(compact('student_id', 'level_id', 'year_id', 'course_id', 'obtained', 'period'));
 
         $state
             ? flashMessage("success", "Note créée avec succès.")
