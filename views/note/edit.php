@@ -100,6 +100,12 @@ $courses = array_column(
                             <?= select('course_id', $courses, (string)$note['course_id'], 'Cours') ?>
                         </div>
 
+                        <!-- Période -->
+                        <div class="mb-4">
+                            <?= select('period', PERIODS, $note['period'], 'Période / Examen') ?>
+                            <div class="form-text">Choisissez la période ou l’examen</div>
+                        </div>
+
                         <div class="mb-3">
                             <?= input('obtained', 'number', $note['obtained'], 'Note obtenue') ?>
                         </div>

@@ -86,6 +86,10 @@ if (!$note) {
                     <label class="form-label text-muted small mb-1">Fermée</label>
                     <p class="fs-5 mb-0"><?= $note['note_is_closed'] ? 'Oui' : 'Non' ?></p>
                 </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label text-muted small mb-1">Période</label>
+                    <p class="fs-5 mb-0"><?= $note['note_period'] ?></p>
+                </div>
 
                 <div class="col-md-6 mb-3">
                     <label class="form-label text-muted small mb-1">Date de création</label>
