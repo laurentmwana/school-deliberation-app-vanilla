@@ -181,11 +181,22 @@ function findNoteByIdWithDetails(string $id): array
     return $stmt->fetch(PDO::FETCH_ASSOC) ?: [];
 }
 
-function findNotesByStudentYearPeriod(string $studentId, string $yearId, string $period)
+function findNotesByStudentYearPeriod(string $studentId, string $yearId, string $period): array
 {
     $pdo = getPdo();
 
-    $statement = $pdo->prepare("SELECT * FROM notes n WHERE n.level_id = ? AND n.student_id = ? AND n.period = ?");
+    $statement = $pdo->prepare("
+        SELECT 
+            n.*, 
+            c.name AS course_name,
+            c.credits AS course_credits
+        FROM notes n
+        INNER JOIN courses c ON c.id = n.course_id
+        WHERE n.student_id = ? 
+          AND n.year_id = ? 
+          AND n.period = ?
+    ");
+
     $statement->execute([$studentId, $yearId, $period]);
 
     if ($statement === false) {

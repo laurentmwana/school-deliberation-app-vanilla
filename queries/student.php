@@ -163,3 +163,18 @@ function findStudentByIdWithLevel(string $id): array
 
     return $stmt->fetch(PDO::FETCH_ASSOC) ?: [];
 }
+
+
+function findStudentsByLevel(string $levelId)
+{
+    $pdo = getPdo();
+
+    $statement = $pdo->prepare("SELECT * FROM students s WHERE s.level_id = ?");
+    $statement->execute([$levelId]);
+
+    if ($statement === false) {
+        return [];
+    }
+
+    return $statement->fetchAll(PDO::FETCH_ASSOC);
+}
