@@ -49,6 +49,15 @@ const ROUTES = [
     'student.update'  => '/student/:id/update',
     'student.show'    => '/student/:id/show',
     'student.destroy' => '/student/:id/destroy',
+
+    // NOTE
+    'note.index'   => '/notes',
+    'note.create'  => '/note/create',        
+    'note.store'   => '/note/create/store',  
+    'note.edit'    => '/note/:id/edit',
+    'note.update'  => '/note/:id/update',
+    'note.show'    => '/note/:id/show',
+    'note.destroy' => '/note/:id/destroy',
 ];
 
 try {
@@ -104,6 +113,14 @@ try {
         case 'student.create': require BASE_VIEW_PATH . '/student/create.php'; break;
         case 'student.store': require BASE_VIEW_PATH . '/student/store.php'; break;
 
+        // NOTE ROUTES
+        case 'note.index': require BASE_VIEW_PATH . '/note/index.php'; break;
+        case 'note.show': require BASE_VIEW_PATH . '/note/show.php'; break;
+        case 'note.destroy': require BASE_VIEW_PATH . '/note/destroy.php'; break;
+        case 'note.edit': require BASE_VIEW_PATH . '/note/edit.php'; break;
+        case 'note.update': require BASE_VIEW_PATH . '/note/update.php'; break;
+        case 'note.create': require BASE_VIEW_PATH . '/note/create.php'; break;
+        case 'note.store': require BASE_VIEW_PATH . '/note/store.php'; break;
 
         default:
             throw new Exception("Page non trouvée", 404);

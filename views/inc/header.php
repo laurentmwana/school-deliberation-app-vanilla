@@ -49,11 +49,11 @@
         <li class="nav-item">
           <a class="nav-link <?= isMenuActive(route("course.index")) ? 'text-primary fw-semibold' : '' ?>" href="<?= route("course.index") ?>">Cours</a>
         </li>
-               <li class="nav-item">
+        <li class="nav-item">
           <a class="nav-link <?= isMenuActive(route("student.index")) ? 'text-primary fw-semibold' : '' ?>" href="<?= route("student.index") ?>">Étudiant</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Notes</a>
+          <a class="nav-link <?= isMenuActive(route("note.index")) ? 'text-primary fw-semibold' : '' ?>" href="<?= route("note.index") ?>">Notes</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Résultats</a>

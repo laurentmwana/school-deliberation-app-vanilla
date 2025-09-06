@@ -75,3 +75,11 @@ function closedYear(string $id): bool
     $statement = $pdo->prepare("UPDATE years SET is_closed = ? WHERE id = ?");
     return $statement->execute([1, $id]);
 }
+
+function findYearCurrent()
+{
+    $pdo = getPdo();
+    
+    $statement = $pdo->query("SELECT * FROM years WHERE is_closed = 0");
+    return $statement->fetchAll();
+}

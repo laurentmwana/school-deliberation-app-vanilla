@@ -1,6 +1,5 @@
 <?php 
 $title = "Une erreur est survenue";
-require 'inc/header.php'; 
 ?>
 
 <div class="container d-flex flex-column justify-content-center align-items-center vh-100 text-center">
@@ -25,5 +24,3 @@ require 'inc/header.php';
         <i class="bi bi-house-door-fill"></i> Retour à l'accueil
     </a>
 </div>
-
-<?php require 'inc/footer.php'; ?>
