@@ -1,17 +1,18 @@
 {
-  "version": "0.1.0",
+  "version": "1.0.0",
   "name": "labeya/deliberation-app",
-  "description": "création d'une application web pour la deliberation dans une école",
-  "autoload": {
-    "psr-4": {
-      "App\\": "src/"
-    }
-  },
   "authors": [
     {
       "name": "Labeya",
       "email": "laurentmwn@gmail.com"
     }
   ],
+  "autoload": {
+    "files": [
+      "functions/utils.php",
+      "functions/form.php",
+      "functions/session.php"
+    ]
+  },
   "require": {}
 }
