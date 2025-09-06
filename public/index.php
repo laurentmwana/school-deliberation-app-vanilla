@@ -14,6 +14,15 @@ const DB_PWD = 'demo';
 
 const GENDERS = ['M', 'F'];
 
+const PERIODS = [
+    'Période 1'         => 'Période 1',
+    'Période 2'         => 'Période 2',
+    'Examen Semestre 1'    => 'Examen Semestre 1',
+    'Période 3'         => 'Période 3',
+    'Période 4'         => 'Période 4',
+    'Examen Semestre 2'    => 'Examen Semestre 2',
+];
+
 const ROUTES = [
     'home'        => '/',
     // YEAR
@@ -58,6 +67,12 @@ const ROUTES = [
     'note.update'  => '/note/:id/update',
     'note.show'    => '/note/:id/show',
     'note.destroy' => '/note/:id/destroy',
+
+    // RESULT
+    'result.index'   => '/results',
+    'result.create'  => '/result/create',        
+    'result.store'   => '/result/create/store',
+    'result.show' => '/result/:id/show',
 ];
 
 try {
@@ -121,6 +136,13 @@ try {
         case 'note.update': require BASE_VIEW_PATH . '/note/update.php'; break;
         case 'note.create': require BASE_VIEW_PATH . '/note/create.php'; break;
         case 'note.store': require BASE_VIEW_PATH . '/note/store.php'; break;
+
+        // RESULT
+        case 'result.index': require BASE_VIEW_PATH . '/result/index.php'; break;
+        case 'result.create': require BASE_VIEW_PATH . '/result/create.php'; break;
+        case 'result.store': require BASE_VIEW_PATH . '/result/store.php'; break;
+        case 'result.show': require BASE_VIEW_PATH . '/result/show.php'; break;
+
 
         default:
             throw new Exception("Page non trouvée", 404);

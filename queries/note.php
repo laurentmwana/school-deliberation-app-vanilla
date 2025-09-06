@@ -65,18 +65,18 @@ function findNoteById(string $id): array
  * @param int|null $exceptId
  * @return bool
  */
-function findNoteIfExist(int $studentId, int $courseId, int $yearId, ?int $exceptId = null): bool
+function findNoteIfExist(int $studentId, int $courseId, int $yearId, string $period, ?int $exceptId = null): bool
 {
     $pdo = getPdo();
 
     if ($exceptId !== null) {
-        $sql = "SELECT 1 FROM notes WHERE student_id = ? AND course_id = ? AND year_id = ? AND id != ? AND is_closed = 0 LIMIT 1";
+        $sql = "SELECT 1 FROM notes WHERE student_id = ? AND course_id = ? AND year_id = ?  AND period = ? AND id != ? AND is_closed = 0 LIMIT 1";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$studentId, $courseId, $yearId, $exceptId]);
+        $stmt->execute([$studentId, $courseId, $yearId, $period, $exceptId]);
     } else {
-        $sql = "SELECT 1 FROM notes WHERE student_id = ? AND course_id = ? AND year_id = ? AND is_closed = 0 LIMIT 1";
+        $sql = "SELECT 1 FROM notes WHERE student_id = ? AND course_id = ? AND year_id = ? AND period = ? AND is_closed = 0 LIMIT 1";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$studentId, $courseId, $yearId]);
+        $stmt->execute([$studentId, $courseId, $yearId, $period]);
     }
 
     return (bool) $stmt->fetchColumn();
@@ -93,8 +93,8 @@ function createNote(array $data): bool
     $pdo = getPdo();
 
     $stmt = $pdo->prepare("
-        INSERT INTO notes (student_id, course_id, level_id, year_id, obtained, is_closed, created_at)
-        VALUES (:student_id, :course_id, :level_id, :year_id, :obtained, 0, NOW())
+        INSERT INTO notes (student_id, course_id, level_id, year_id, obtained, period, is_closed, created_at)
+        VALUES (:student_id, :course_id, :level_id, :year_id, :obtained, :period, 0, NOW())
     ");
 
     return $stmt->execute($data);
@@ -114,7 +114,7 @@ function updateNote(string $id, array $data): bool
     $stmt = $pdo->prepare("
         UPDATE notes 
         SET student_id = :student_id, course_id = :course_id, level_id = :level_id, year_id = :year_id,
-            obtained = :obtained
+            obtained = :obtained, period = :period 
         WHERE id = :id
     ");
 
@@ -151,6 +151,7 @@ function findNoteByIdWithDetails(string $id): array
             n.id AS note_id,
             n.obtained AS note_obtained,
             n.is_closed AS note_is_closed,
+            n.period AS note_period,
             n.created_at AS note_created_at,
             s.id AS student_id,
             s.name AS student_name,
@@ -178,4 +179,29 @@ function findNoteByIdWithDetails(string $id): array
     }
 
     return $stmt->fetch(PDO::FETCH_ASSOC) ?: [];
+}
+
+function findNotesByStudentYearPeriod(string $studentId, string $yearId, string $period): array
+{
+    $pdo = getPdo();
+
+    $statement = $pdo->prepare("
+        SELECT 
+            n.*, 
+            c.name AS course_name,
+            c.credits AS course_credits
+        FROM notes n
+        INNER JOIN courses c ON c.id = n.course_id
+        WHERE n.student_id = ? 
+          AND n.year_id = ? 
+          AND n.period = ?
+    ");
+
+    $statement->execute([$studentId, $yearId, $period]);
+
+    if ($statement === false) {
+        return [];
+    }
+
+    return $statement->fetchAll(PDO::FETCH_ASSOC);
 }

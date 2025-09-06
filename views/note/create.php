@@ -83,6 +83,12 @@ $courses = array_column(
                             <?= select('course_id', $courses, null, 'Cours') ?>
                         </div>
 
+                          <!-- Période -->
+                        <div class="mb-4">
+                            <?= select('period', PERIODS, null, 'Période / Examen') ?>
+                            <div class="form-text">Choisissez la période ou l’examen</div>
+                        </div>
+
                         <div class="mb-3">
                             <?= input('obtained', 'number', null, 'Note obtenue') ?>
                         </div>

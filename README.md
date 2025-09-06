@@ -1,57 +1,78 @@
-# School Deliberation App (Vanilla Code)
+# School Deliberation App (Code Vanilla)
 
-A simple school deliberation application built using vanilla PHP/HTML/CSS/JS.  
-This project helps manage students, courses, and academic deliberation data.
+Une application simple de délibération scolaire construite avec PHP/HTML/CSS/JS vanilla.
+Ce projet permet de gérer les étudiants, les cours et les données de délibération académique.
 
-## Features
+## Fonctionnalités
 
-- User authentication (admin user creation)
-- Student management (CRUD)
-- Course management
-- Database constants and configuration
-- Seeders for sample data
-- Error handling and improved styling
-- Clean, minimal, vanilla code implementation
+- Authentification des utilisateurs (création d’un utilisateur admin)
+- Gestion des étudiants (CRUD)
+- Gestion des cours
+- Configuration de la base de données via constantes
+- Seeders pour les données d’exemple
+- Gestion des erreurs et amélioration du style
+- Code propre, minimaliste et en PHP vanilla
 
 ## Installation
 
-1. Clone the repository:
+1. Cloner le dépôt :
 
    ```bash
-   git clone https://github.com/yourusername/school-deliberation-app.git
+   git clone https://github.com/laurentmwana/school-deliberation-app-vanilla
    ```
 
-2. Navigate to the project folder:
+2. Accéder au dossier du projet :
 
    ```bash
    cd school-deliberation-app
    ```
 
-3. Set up your database and update configuration constants.
-4. Run the seeders to populate initial data.
-5. Serve the application using your local PHP server:
+3. Définir les informations de connexion à la base de données dans le fichier de configuration :
 
-   ```bash
-   php -S localhost:8000
+   ```php
+   const DB_NAME     = 'nom_de_votre_base';
+   const DB_USERNAME = 'votre_utilisateur';
+   const DB_PWD      = 'votre_mot_de_passe';
    ```
 
-## Usage
+4. Importer la base de données avec le fichier `database.sql` :
 
-- Access the application in your browser at `http://localhost:8000`.
-- Log in with the admin user to manage students and courses.
-- Perform CRUD operations on students.
-- Review academic deliberation results.
+   ```bash
+   mysql -u username -p database_name < database.sql
+   ```
+
+5. Exécuter le seeder pour remplir la base avec les données initiales :
+
+   ```bash
+   php seeder.php
+   ```
+
+6. Informations par défaut de l’utilisateur admin :
+
+   ```text
+   username: admin
+   password: admin123
+   ```
+
+7. Lancer l’application avec le serveur PHP local :
+
+   ```bash
+   php -S localhost:8000 -t public
+   ```
+
+## Utilisation
+
+- Accéder à l’application dans votre navigateur à l’adresse `http://localhost:8000`.
+- Se connecter avec l’utilisateur admin pour gérer les étudiants et les cours.
+- Effectuer des opérations CRUD sur les étudiants et les cours.
+- Consulter et gérer les résultats des délibérations académiques.
 
 ## Contribution
 
-- Fork the repository and create a new branch for your features.
-- Commit your changes and push to your branch.
-- Submit a pull request for review.
+- Forker le dépôt et créer une nouvelle branche pour vos fonctionnalités.
+- Committer vos changements et pousser sur votre branche.
+- Soumettre une pull request pour revue.
 
-## Author
+## Licence
 
-@laurentmwana
-
-## License
-
-This project is licensed under the MIT License.
+Ce projet est sous licence MIT.

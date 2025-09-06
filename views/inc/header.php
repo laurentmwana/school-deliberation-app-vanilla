@@ -55,8 +55,8 @@
         <li class="nav-item">
           <a class="nav-link <?= isMenuActive(route("note.index")) ? 'text-primary fw-semibold' : '' ?>" href="<?= route("note.index") ?>">Notes</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Résultats</a>
+          <li class="nav-item">
+          <a class="nav-link <?= isMenuActive(route("result.index")) ? 'text-primary fw-semibold' : '' ?>" href="<?= route("result.index") ?>">Résultats</a>
         </li>
       </ul>
 
